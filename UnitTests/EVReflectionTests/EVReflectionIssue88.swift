@@ -17,7 +17,7 @@ class TestIssue88: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(Encoding.self)
+        EVReflectionClass.setBundleIdentifier(Encoding.self)
     }
     
     override func tearDown() {
@@ -40,11 +40,11 @@ class TestIssue88: XCTestCase {
             ]
         ]
         let obj = Note(dictionary: dictionary as NSDictionary)
-        let str = EVReflection.description(obj)
+        let str = EVReflectionClass.description(obj)
         print(str)
 
         let obj2 = Note2(dictionary: dictionary as NSDictionary)
-        let str2 = EVReflection.description(obj2)
+        let str2 = EVReflectionClass.description(obj2)
         print(str2)
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 /**
  Reflection methods
  */
-final public class EVReflection {
+final public class EVReflectionClass {
     
     // MARK: - From and to Dictrionary parsing
     
@@ -339,7 +339,7 @@ final public class EVReflection {
         if let v = theObject as? EVCustomReflectable {
             dict = v.toCodableValue() as? NSDictionary ?? NSDictionary()
         } else {
-            let (dictionary, _) = EVReflection.toDictionary(theObject, conversionOptions: conversionOptions)
+            let (dictionary, _) = EVReflectionClass.toDictionary(theObject, conversionOptions: conversionOptions)
             dict = dictionary
         }
         
@@ -428,7 +428,7 @@ final public class EVReflection {
                 }
             }
         }
-        EVReflection.setPropertiesfromDictionary(dict, anyObject: theObject, conversionOptions: conversionOptions)
+        EVReflectionClass.setPropertiesfromDictionary(dict, anyObject: theObject, conversionOptions: conversionOptions)
     }
     
     /**
@@ -506,8 +506,8 @@ final public class EVReflection {
         }
         
         // If no object was specified but an identifier was set, then use that identifier.
-        if EVReflection.bundleIdentifier != nil {
-            return EVReflection.bundleIdentifier!
+        if EVReflectionClass.bundleIdentifier != nil {
+            return EVReflectionClass.bundleIdentifier!
         }
         
         // use the bundle name from the main bundle, if that's not set use the identifier
@@ -528,8 +528,8 @@ final public class EVReflection {
         }
         
         // If no object was specified but an identifier was set, then use that identifier.
-        if EVReflection.bundleIdentifier != nil {
-            return EVReflection.bundleIdentifier!
+        if EVReflectionClass.bundleIdentifier != nil {
+            return EVReflectionClass.bundleIdentifier!
         }
         
         // use the bundle name from the main bundle, if that's not set use the identifier
@@ -549,7 +549,7 @@ final public class EVReflection {
      - parameter forClass: The class that will be used to find the appName for in which we can find classes by string.
      */
     public class func setBundleIdentifier(_ forClass: AnyClass) {
-        EVReflection.bundleIdentifier = nameForBundle(Bundle(for:forClass))
+        EVReflectionClass.bundleIdentifier = nameForBundle(Bundle(for:forClass))
     }
 
     /**
@@ -558,7 +558,7 @@ final public class EVReflection {
      - parameter identifier: The identifier that will be used.
      */
     public class func setBundleIdentifier(_ identifier: String) {
-        EVReflection.bundleIdentifier = identifier
+        EVReflectionClass.bundleIdentifier = identifier
     }
     
     

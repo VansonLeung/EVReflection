@@ -51,7 +51,7 @@ open class EVObjectDescription {
     - parameter forObject: the object that you want the description for
     */
     public init(forObject: NSObject) {
-        bundleName = EVReflection.getCleanAppName()
+        bundleName = EVReflectionClass.getCleanAppName()
         swiftClassID = NSStringFromClass(type(of: forObject))
         
         if swiftClassID.hasPrefix("_T") {

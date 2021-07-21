@@ -25,13 +25,13 @@ import CoreData
                                      json: String?,
                                      forKeyPath: String? = nil) {
         let t=type(of: self)
-        let name = entityName ?? EVReflection.swiftStringFromClass(t)
+        let name = entityName ?? EVReflectionClass.swiftStringFromClass(t)
         let entity = NSEntityDescription.entity(forEntityName: name, in: context)
         super.init(entity: entity!, insertInto: context)
         
-        let jsonDictionary = EVReflection.dictionaryFromJson(json)
+        let jsonDictionary = EVReflectionClass.dictionaryFromJson(json)
         
-        EVReflection.setPropertiesfromDictionary(jsonDictionary, anyObject: self, forKeyPath: forKeyPath)
+        EVReflectionClass.setPropertiesfromDictionary(jsonDictionary, anyObject: self, forKeyPath: forKeyPath)
     }
     
     public required override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
@@ -48,7 +48,7 @@ import CoreData
      */
     open override var description: String {
         get {
-            return "\(EVReflection.swiftStringFromClass(self)) = \(self.toJsonString(prettyPrinted: true))"
+            return "\(EVReflectionClass.swiftStringFromClass(self)) = \(self.toJsonString(prettyPrinted: true))"
         }
     }
     
@@ -122,8 +122,8 @@ import CoreData
         if let kvc = self as? EVGenericsKVC {
             kvc.setGenericValue(value as AnyObject?, forUndefinedKey: key)
         } else {
-            self.addStatusMessage(.IncorrectKey, message: "The class '\(EVReflection.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'")
-            evPrint(.IncorrectKey, "\nWARNING: The class '\(EVReflection.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'\n There is no support for optional type, array of optionals or enum properties.\nAs a workaround you can implement the function 'setValue forUndefinedKey' for this. See the unit tests for more information\n")
+            self.addStatusMessage(.IncorrectKey, message: "The class '\(EVReflectionClass.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'")
+            evPrint(.IncorrectKey, "\nWARNING: The class '\(EVReflectionClass.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'\n There is no support for optional type, array of optionals or enum properties.\nAs a workaround you can implement the function 'setValue forUndefinedKey' for this. See the unit tests for more information\n")
             
         }
     }
@@ -140,7 +140,7 @@ import CoreData
      */
     public convenience required init?(coder: NSCoder) {
         self.init()
-        EVReflection.decodeObjectWithCoder(self, aDecoder: coder, conversionOptions: .DefaultNSCoding)
+        EVReflectionClass.decodeObjectWithCoder(self, aDecoder: coder, conversionOptions: .DefaultNSCoding)
     }
     
     
@@ -150,7 +150,7 @@ import CoreData
      - parameter aCoder: The NSCoder that will be used for encoding the object
      */
     open func encode(with aCoder: NSCoder) {
-        EVReflection.encodeWithCoder(self , aCoder: aCoder, conversionOptions: .DefaultNSCoding)
+        EVReflectionClass.encodeWithCoder(self , aCoder: aCoder, conversionOptions: .DefaultNSCoding)
     }
     
     

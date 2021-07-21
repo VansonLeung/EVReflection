@@ -44,7 +44,7 @@ class TestIssue99: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(Message.self)
+        EVReflectionClass.setBundleIdentifier(Message.self)
     }
     
     override func tearDown() {
@@ -74,7 +74,7 @@ class TestIssue99: XCTestCase {
     func testIssue24() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
-        EVReflection.setDateFormatter(dateFormatter)
+        EVReflectionClass.setDateFormatter(dateFormatter)
         
         let json = "[{ \"positiveResponsePercentage\" : 80, \"Description\" : \"The description\", \"myPrimaryObjectId\" : \"ADSF13\", \"numberOfOccurrences\" : 2, \"name\" : \"The name\", \"secondaryObjects\" : [ { \"rating\" : 9, \"dateRecorded\" : \"20160620\", \"mySecondaryObjectId\" : 1, \"userRemarks\" : \"The remarks\" }, { \"rating\" : 8, \"dateRecorded\" : \"20160515\", \"mySecondaryObjectId\" : 2, \"userRemarks\" : \"More remarks\" }]}]"
         let x = [MyPrimaryObject](json: json)
@@ -87,7 +87,7 @@ class TestIssue99: XCTestCase {
         //I modified the PublicInfusion.vodkaHistory to be empty instead of nil.  Which is different from my original example
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        EVReflection.setDateFormatter(dateFormatter)
+        EVReflectionClass.setDateFormatter(dateFormatter)
         
         //test 1 - PublicInfusion (MyPrimaryObject)
         //show PublicInfusion without array of secondary objects

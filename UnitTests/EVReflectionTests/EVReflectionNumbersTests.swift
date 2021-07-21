@@ -21,7 +21,7 @@ class EVReflectionNumbersTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(TestObject.self)
+        EVReflectionClass.setBundleIdentifier(TestObject.self)
     }
     
     /**
@@ -84,27 +84,27 @@ class EVReflectionNumbersTests: XCTestCase {
      */
     func testNSNumber() {
         let test1 = NSNumber(value: Double(Int.max) as Double)
-        let (value1, _, _) = EVReflection.valueForAny("", key: "", anyValue: test1)
+        let (value1, _, _) = EVReflectionClass.valueForAny("", key: "", anyValue: test1)
         XCTAssert(value1 as? NSNumber == NSNumber(value: Double(Int.max) as Double), "Values should be same for type NSNumber")
         
         let test2: Float = 458347970560
-        let (value2, _, _) = EVReflection.valueForAny("", key: "", anyValue: test2)
+        let (value2, _, _) = EVReflectionClass.valueForAny("", key: "", anyValue: test2)
         XCTAssert(value2 as? NSNumber == NSNumber(value: 458347970560 as Float), "Values should be same for type Float")
         
         let test3: Double = 458347970560
-        let (value3, _, _) = EVReflection.valueForAny("", key: "", anyValue: test3)
+        let (value3, _, _) = EVReflectionClass.valueForAny("", key: "", anyValue: test3)
         XCTAssert(value3 as? NSNumber == NSNumber(value: 458347970560 as Double), "Values should be same for type Double")
         
         let test4: Int64 = Int64.max
-        let (value4, _, _) = EVReflection.valueForAny("", key: "", anyValue: test4)
+        let (value4, _, _) = EVReflectionClass.valueForAny("", key: "", anyValue: test4)
         XCTAssert(value4 as? NSNumber == NSNumber(value: Int64.max as Int64), "Values should be same for type Int64")
         
         let test5: Int32 = Int32.max
-        let (value5, _, _) = EVReflection.valueForAny("", key: "", anyValue: test5)
+        let (value5, _, _) = EVReflectionClass.valueForAny("", key: "", anyValue: test5)
         XCTAssert(value5 as? NSNumber == NSNumber(value: Int32.max as Int32), "Values should be same for type Int32")
         
         let test6: Int = Int.max
-        let (value6, _, _) = EVReflection.valueForAny("", key: "", anyValue: test6)
+        let (value6, _, _) = EVReflectionClass.valueForAny("", key: "", anyValue: test6)
         XCTAssert(value6 as? NSNumber == NSNumber(value: Int.max as Int), "Values should be same for type Int64")
     }
 }

@@ -21,7 +21,7 @@ class EVReflectionEVObjectTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(TestObject.self)
+        EVReflectionClass.setBundleIdentifier(TestObject.self)
     }
     
     /**
@@ -68,7 +68,7 @@ class EVReflectionEVObjectTests: XCTestCase {
         let theObject = TestObject2()
         theObject.objectValue = "value1"
         NSLog("theObject = \(theObject)")
-        EVReflection.logObject(theObject)
+        EVReflectionClass.logObject(theObject)
     }
     
     /**

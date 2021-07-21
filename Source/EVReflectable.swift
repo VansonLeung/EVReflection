@@ -153,7 +153,7 @@ extension EVReflectable where Self: NSObject {
         if let v = self as? EVCustomReflectable {
             let _ = v.constructWith(value: dictionary)
         } else {
-            EVReflection.setPropertiesfromDictionary(dictionary, anyObject: self, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
+            EVReflectionClass.setPropertiesfromDictionary(dictionary, anyObject: self, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
         }
     }
     
@@ -165,11 +165,11 @@ extension EVReflectable where Self: NSObject {
      */
     public init(json: String?, conversionOptions: ConversionOptions = .DefaultDeserialize, forKeyPath: String? = nil) {
         self.init()
-        let dictionary = EVReflection.dictionaryFromJson(json)
+        let dictionary = EVReflectionClass.dictionaryFromJson(json)
         if let v = self as? EVCustomReflectable {
             let _ = v.constructWith(value: dictionary)
         } else {
-            EVReflection.setPropertiesfromDictionary(dictionary, anyObject: self, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
+            EVReflectionClass.setPropertiesfromDictionary(dictionary, anyObject: self, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
         }
     }
     
@@ -185,7 +185,7 @@ extension EVReflectable where Self: NSObject {
         if let v = self as? EVCustomReflectable {
             let _ = v.constructWith(value: dictionary)
         } else {
-            EVReflection.setPropertiesfromDictionary(dictionary, anyObject: self, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
+            EVReflectionClass.setPropertiesfromDictionary(dictionary, anyObject: self, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
         }
     }
     
@@ -204,7 +204,7 @@ extension EVReflectable where Self: NSObject {
                 let dictionary = temp.toDictionary(conversionOptions)
                 let _ = v.constructWith(value: dictionary)
             } else {
-                EVReflection.setPropertiesfromDictionary( temp.toDictionary(conversionOptions), anyObject: self, conversionOptions: conversionOptions)
+                EVReflectionClass.setPropertiesfromDictionary( temp.toDictionary(conversionOptions), anyObject: self, conversionOptions: conversionOptions)
             }
         }
     }
@@ -223,7 +223,7 @@ extension EVReflectable where Self: NSObject {
                 let dictionary = temp.toDictionary(conversionOptions)
                 let _ = v.constructWith(value: dictionary)
             } else {
-                EVReflection.setPropertiesfromDictionary( temp.toDictionary(conversionOptions), anyObject: self, conversionOptions: conversionOptions)
+                EVReflectionClass.setPropertiesfromDictionary( temp.toDictionary(conversionOptions), anyObject: self, conversionOptions: conversionOptions)
             }
         }
     }
@@ -240,7 +240,7 @@ extension EVReflectable where Self: NSObject {
         if let v = self as? EVCustomReflectable {
             let _ = v.constructWith(value: dict)
         } else {
-            EVReflection.setPropertiesfromDictionary(dict, anyObject: self, conversionOptions: conversionOptions)
+            EVReflectionClass.setPropertiesfromDictionary(dict, anyObject: self, conversionOptions: conversionOptions)
         }
         
     }
@@ -252,7 +252,7 @@ extension EVReflectable where Self: NSObject {
      */
     public var hashValue: Int {
         get {
-            return Int(EVReflection.hashValue(self))
+            return Int(EVReflectionClass.hashValue(self))
         }
     }
     
@@ -284,7 +284,7 @@ extension EVReflectable {
      */
     static public func == (lhs: EVReflectable, rhs: EVReflectable) -> Bool {
         if let lhso = lhs as? NSObject, let rhso = rhs as? NSObject {
-            return EVReflection.areEqual(lhso, rhs: rhso)
+            return EVReflectionClass.areEqual(lhso, rhs: rhso)
         }
         return lhs.isEqual(rhs)
     }
@@ -299,7 +299,7 @@ extension EVReflectable {
      */
     static public func != (lhs: EVReflectable, rhs: EVReflectable) -> Bool {
         if let lhso = lhs as? NSObject, let rhso = rhs as? NSObject {
-            return !EVReflection.areEqual(lhso, rhs: rhso)
+            return !EVReflectionClass.areEqual(lhso, rhs: rhso)
         }
         return !lhs.isEqual(rhs)
     }
@@ -449,7 +449,7 @@ extension EVReflectable {
      */
     public func toDictionary(_ conversionOptions: ConversionOptions = .DefaultSerialize) -> NSDictionary {
         if let obj = self as? NSObject {
-            let (reflected, _) = EVReflection.toDictionary(obj, conversionOptions: conversionOptions)
+            let (reflected, _) = EVReflectionClass.toDictionary(obj, conversionOptions: conversionOptions)
             return reflected
         }
         evPrint(.ShouldExtendNSObject, "ERROR: You should only extend object with EVReflectable that are derived from NSObject!")
@@ -486,7 +486,7 @@ extension EVReflectable {
         }
         
         if let v = self as? NSObject {
-            dict = EVReflection.convertDictionaryForJsonSerialization(dict, theObject: v)
+            dict = EVReflectionClass.convertDictionaryForJsonSerialization(dict, theObject: v)
         }
         
         do {
@@ -508,7 +508,7 @@ extension EVReflectable {
      - returns: An array of objects
      */
     public static func arrayFromJson<T>(_ json: String?, conversionOptions: ConversionOptions = .DefaultDeserialize) -> [T] where T:NSObject {
-        return EVReflection.arrayFromJson(type: T(), json: json, conversionOptions: conversionOptions)
+        return EVReflectionClass.arrayFromJson(type: T(), json: json, conversionOptions: conversionOptions)
     }
     
     /**
@@ -525,7 +525,7 @@ extension EVReflectable {
         let nsobjectype: NSObject.Type = T.self as NSObject.Type
         let nsobject: NSObject = nsobjectype.init()
         let dict = self.toDictionary()
-        let result = EVReflection.setPropertiesfromDictionary(dict, anyObject: nsobject, conversionOptions: conversionOptions)
+        let result = EVReflectionClass.setPropertiesfromDictionary(dict, anyObject: nsobject, conversionOptions: conversionOptions)
         return result as? T ?? T()
     }
     

@@ -21,7 +21,7 @@ class CoreDataTests: XCTestCase {
      */
     override func setUp() {
         super.setUp()
-        EVReflection.setBundleIdentifier(CoreDataPerson.self)
+        EVReflectionClass.setBundleIdentifier(CoreDataPerson.self)
     }
     
     /**

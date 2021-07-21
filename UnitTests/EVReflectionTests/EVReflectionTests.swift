@@ -19,7 +19,7 @@ class EVReflectionTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(TestObject.self)
+        EVReflectionClass.setBundleIdentifier(TestObject.self)
     }
 
     /**
@@ -36,26 +36,26 @@ class EVReflectionTests: XCTestCase {
     func testClassToAndFromString() {
         // Test the EVReflection class - to and from string
         let theObject = TestObject()
-        let theObjectString: String = EVReflection.swiftStringFromClass(theObject)
+        let theObjectString: String = EVReflectionClass.swiftStringFromClass(theObject)
         NSLog("swiftStringFromClass = \(theObjectString)")
 
-        let nsobject = EVReflection.swiftClassFromString(theObjectString)
+        let nsobject = EVReflectionClass.swiftClassFromString(theObjectString)
         NSLog("object = \(nsobject.debugDescription )")
         XCTAssert(nsobject != nil, "Pass")
 
         let theObject2 = SubObject2()
-        let theObject2String: String = EVReflection.swiftStringFromClass(theObject2)
+        let theObject2String: String = EVReflectionClass.swiftStringFromClass(theObject2)
         NSLog("swiftStringFromClass = \(theObject2String)")
         
-        let nsobject2 = EVReflection.swiftClassFromString(theObject2String)
+        let nsobject2 = EVReflectionClass.swiftClassFromString(theObject2String)
         NSLog("object = \(nsobject2.debugDescription )")
         XCTAssert(nsobject != nil, "Pass")
         
         
-        let nsobject3 = EVReflection.swiftClassFromString("NSObject")
+        let nsobject3 = EVReflectionClass.swiftClassFromString("NSObject")
         XCTAssertNotNil(nsobject3, "Pass")
 
-        let nsobject4 = EVReflection.swiftClassFromString("NotExistingClassName")
+        let nsobject4 = EVReflectionClass.swiftClassFromString("NotExistingClassName")
         XCTAssertNil(nsobject4, "Pass")
         
     }
@@ -70,11 +70,11 @@ class EVReflectionTests: XCTestCase {
     */
     func testClassToAndFromDictionary() {
         let theObject = TestObject2()
-        let theObjectString: String = EVReflection.swiftStringFromClass(theObject)
+        let theObjectString: String = EVReflectionClass.swiftStringFromClass(theObject)
         theObject.objectValue = "testing"
-        let (toDict, _) = EVReflection.toDictionary(theObject)
+        let (toDict, _) = EVReflectionClass.toDictionary(theObject)
         NSLog("toDictionary = \(toDict)")
-        let nsobject = EVReflection.fromDictionary(toDict, anyobjectTypeString: theObjectString) as? TestObject2
+        let nsobject = EVReflectionClass.fromDictionary(toDict, anyobjectTypeString: theObjectString) as? TestObject2
         NSLog("object = \(nsobject.debugDescription), objectValue = \(nsobject?.objectValue ?? "")")
         XCTAssert(theObject == nsobject, "Pass")
     }
@@ -86,7 +86,7 @@ class EVReflectionTests: XCTestCase {
         let json = x.toJsonString([.DefaultSerialize, .KeyCleanup])
         XCTAssertTrue(!json.contains("_default"), "Key should have been cleaned up")
         
-        let y = EVReflection.fromDictionary(["a":"b"], anyobjectTypeString: "NotExistingClassName")
+        let y = EVReflectionClass.fromDictionary(["a":"b"], anyobjectTypeString: "NotExistingClassName")
         XCTAssertNil(y, "Class is unknow, so we should not have an instance")
     }
 
@@ -105,12 +105,12 @@ class EVReflectionTests: XCTestCase {
     */
     func testClassToAndFromDictionaryWithNullableType() {
         let theObject = TestObject3()
-        let theObjectString: String = EVReflection.swiftStringFromClass(theObject)
+        let theObjectString: String = EVReflectionClass.swiftStringFromClass(theObject)
         theObject.objectValue = "testing"
         theObject.nullableType = 3
-        let (toDict, _) = EVReflection.toDictionary(theObject)
+        let (toDict, _) = EVReflectionClass.toDictionary(theObject)
         NSLog("toDictionary = \(toDict)")
-        let nsobject = EVReflection.fromDictionary(toDict, anyobjectTypeString: theObjectString) as? TestObject3
+        let nsobject = EVReflectionClass.fromDictionary(toDict, anyobjectTypeString: theObjectString) as? TestObject3
         NSLog("object = \(nsobject.debugDescription), objectValue = \(nsobject?.objectValue ?? "")")
         XCTAssert(theObject == nsobject, "Pass")
     }
@@ -166,7 +166,7 @@ class EVReflectionTests: XCTestCase {
     func testClassToJsonWithDateFormatter() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
-        EVReflection.setDateFormatter(dateFormatter)
+        EVReflectionClass.setDateFormatter(dateFormatter)
         
         let theObject = TestObject4()
         theObject.myString = "string"
@@ -181,7 +181,7 @@ class EVReflectionTests: XCTestCase {
         theObject.myDate = Date().addingTimeInterval(3600)
         XCTAssert(theObject != newObject, "Should not be the same")
         
-        EVReflection.setDateFormatter(nil)
+        EVReflectionClass.setDateFormatter(nil)
 
     }
     

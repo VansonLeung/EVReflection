@@ -44,7 +44,7 @@ class AlamofireXmlToObjects3Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(AllGames.self)
+        EVReflectionClass.setBundleIdentifier(AllGames.self)
     }
 
     override func tearDown() {
@@ -62,7 +62,7 @@ class AlamofireXmlToObjects3Tests: XCTestCase {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormatter.dateFormat = "ddd yyyy'-'MM'-'dd' 'HH':'mm':'ss Z"
-        EVReflection.setDateFormatter(dateFormatter)
+        EVReflectionClass.setDateFormatter(dateFormatter)
 
         Alamofire.request(URL)
             .responseObjectFromXML { (response: DataResponse<AllGames>) in

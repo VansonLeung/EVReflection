@@ -20,7 +20,7 @@ class EVReflectionWorkaroundSwiftGenericsTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(TestObject.self)
+        EVReflectionClass.setBundleIdentifier(TestObject.self)
     }
     
     /**
@@ -58,7 +58,7 @@ class EVReflectionWorkaroundSwiftGenericsTests: XCTestCase {
     }
 
     func testGenericsJson2() {
-        EVReflection.setBundleIdentifier(InstanceObject.self)
+        EVReflectionClass.setBundleIdentifier(InstanceObject.self)
         let json: String = "{\"test\":\"test\", \"data\":{\"name\":\"data\"}, \"array\":[{\"name\":\"val1\"}, {\"name\":\"val2\"}, {\"name\":\"val3\"}]}"
         let a = MyGenericObject<InstanceObject>(json: json)
         XCTAssertEqual(a.test, "test", "test should contain test")
@@ -74,10 +74,10 @@ class EVReflectionWorkaroundSwiftGenericsTests: XCTestCase {
     func testClassToAndFromString() {
         // Test the EVReflection class - to and from string
         let theObject = MyGenericObject<InstanceObject>()
-        let theObjectString: String = EVReflection.swiftStringFromClass(theObject)
+        let theObjectString: String = EVReflectionClass.swiftStringFromClass(theObject)
         NSLog("swiftStringFromClass = \(theObjectString)")
         
-        let nsobject = EVReflection.swiftClassFromString(theObjectString)
+        let nsobject = EVReflectionClass.swiftClassFromString(theObjectString)
         NSLog("object = \(String(describing: nsobject))")
         XCTAssert(nsobject != nil, "Pass")
     }

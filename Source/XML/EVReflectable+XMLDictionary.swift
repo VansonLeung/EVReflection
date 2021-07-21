@@ -25,7 +25,7 @@ extension EVReflectable where Self: NSObject {
                 XMLToMap = result
             }
             
-            let _ = EVReflection.setPropertiesfromDictionary(XMLToMap, anyObject: self, conversionOptions: conversionOptions)
+            let _ = EVReflectionClass.setPropertiesfromDictionary(XMLToMap, anyObject: self, conversionOptions: conversionOptions)
         } else {
             return nil
         }

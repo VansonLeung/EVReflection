@@ -14,7 +14,7 @@ class EVReflectionCustomInitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        EVReflection.setBundleIdentifier(TestObject.self)
+        EVReflectionClass.setBundleIdentifier(TestObject.self)
     }
     
     func testConvenienceInitSetsPropertyValue() {

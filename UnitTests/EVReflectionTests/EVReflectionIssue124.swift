@@ -16,7 +16,7 @@ class TestIssue124: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(MoreSection.self)
+        EVReflectionClass.setBundleIdentifier(MoreSection.self)
     }
     
     override func tearDown() {

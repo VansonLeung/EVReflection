@@ -22,7 +22,7 @@ public extension Array where Element: NSObject {
     init(json: String?, conversionOptions: ConversionOptions = .DefaultDeserialize, forKeyPath: String? = nil) {
         self.init()
         let arrayTypeInstance = getArrayTypeInstance(self)
-        let newArray = EVReflection.arrayFromJson(type: arrayTypeInstance, json: json, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
+        let newArray = EVReflectionClass.arrayFromJson(type: arrayTypeInstance, json: json, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
         for item in newArray {
             self.append(item)
         }
@@ -38,7 +38,7 @@ public extension Array where Element: NSObject {
     init(data: Data?, conversionOptions: ConversionOptions = .DefaultDeserialize, forKeyPath: String? = nil) {
         self.init()
         let arrayTypeInstance = getArrayTypeInstance(self)
-        let newArray = EVReflection.arrayFromData(nil, type:arrayTypeInstance, data: data, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
+        let newArray = EVReflectionClass.arrayFromData(nil, type:arrayTypeInstance, data: data, conversionOptions: conversionOptions, forKeyPath: forKeyPath)
         for item in newArray {
             self.append(item)
         }
@@ -54,7 +54,7 @@ public extension Array where Element: NSObject {
         self.init()
         for item in dictionaryArray {
             let arrayTypeInstance = getArrayTypeInstance(self)
-            EVReflection.setPropertiesfromDictionary(item, anyObject: arrayTypeInstance)
+            EVReflectionClass.setPropertiesfromDictionary(item, anyObject: arrayTypeInstance)
             self.append(arrayTypeInstance)
         }
     }
@@ -75,7 +75,7 @@ public extension Array where Element: NSObject {
         
         for item in dictionaryArray {
             let arrayTypeInstance = getArrayTypeInstance(self)
-            EVReflection.setPropertiesfromDictionary(item, anyObject: arrayTypeInstance)
+            EVReflectionClass.setPropertiesfromDictionary(item, anyObject: arrayTypeInstance)
             self.append(arrayTypeInstance)
         }
     }
@@ -175,7 +175,7 @@ public extension Array where Element: NSDictionary {
     init(jsonArray: String) {
         self.init()
 
-        let dictArray = EVReflection.dictionaryArrayFromJson(jsonArray)
+        let dictArray = EVReflectionClass.dictionaryArrayFromJson(jsonArray)
         
         for item in dictArray {
             self.append(item as! Element)

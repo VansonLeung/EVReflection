@@ -53,7 +53,7 @@ class AlamofireXmlTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(JDBOR.self)
+        EVReflectionClass.setBundleIdentifier(JDBOR.self)
     }
     
     override func tearDown() {

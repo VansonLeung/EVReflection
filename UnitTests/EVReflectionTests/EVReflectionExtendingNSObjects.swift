@@ -32,8 +32,8 @@ extension ExtendingNSObjectsMore: EVReflectable {
         if let kvc = self as? EVGenericsKVC {
             kvc.setGenericValue(value as AnyObject?, forUndefinedKey: key)
         } else {
-            self.addStatusMessage(.IncorrectKey, message: "The class '\(EVReflection.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'")
-            print("\nWARNING: The class '\(EVReflection.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'\n There is no support for optional type, array of optionals or enum properties.\nAs a workaround you can implement the function 'setValue forUndefinedKey' for this. See the unit tests for more information\n")
+            self.addStatusMessage(.IncorrectKey, message: "The class '\(EVReflectionClass.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'")
+            print("\nWARNING: The class '\(EVReflectionClass.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'\n There is no support for optional type, array of optionals or enum properties.\nAs a workaround you can implement the function 'setValue forUndefinedKey' for this. See the unit tests for more information\n")
             
         }
     }
@@ -46,20 +46,20 @@ extension ExtendingNSObjectsMore {
 
     open override func isEqual(_ object: Any?) -> Bool { // for isEqual:
         if let obj = object as? EVObject {
-            return EVReflection.areEqual(self, rhs: obj)
+            return EVReflectionClass.areEqual(self, rhs: obj)
         }
         return false
     }
     
     open override var description: String {
         get {
-            return EVReflection.description(self, prettyPrinted: true)
+            return EVReflectionClass.description(self, prettyPrinted: true)
         }
     }
     
     open override var debugDescription: String {
         get {
-            return EVReflection.description(self, prettyPrinted: true)
+            return EVReflectionClass.description(self, prettyPrinted: true)
         }
     }
 }
@@ -70,11 +70,11 @@ extension ExtendingNSObjectsMore {
 public class ExtendingNSObjectsCoding: ExtendingNSObjectsMore, NSCoding {
     public convenience required init?(coder: NSCoder) {
         self.init()
-        EVReflection.decodeObjectWithCoder(self, aDecoder: coder, conversionOptions: .DefaultNSCoding)
+        EVReflectionClass.decodeObjectWithCoder(self, aDecoder: coder, conversionOptions: .DefaultNSCoding)
     }
     
     open func encode(with aCoder: NSCoder) {
-        EVReflection.encodeWithCoder(self , aCoder: aCoder, conversionOptions: .DefaultNSCoding)
+        EVReflectionClass.encodeWithCoder(self , aCoder: aCoder, conversionOptions: .DefaultNSCoding)
     }
 }
 

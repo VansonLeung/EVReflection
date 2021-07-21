@@ -22,10 +22,10 @@ public extension Array where Element: EVManagedObject {
      */
     init(context: NSManagedObjectContext, json: String?, conversionOptions: ConversionOptions = .DefaultDeserialize) {
         self.init()
-        let dictArray: [NSDictionary] = EVReflection.dictionaryArrayFromJson(json)
+        let dictArray: [NSDictionary] = EVReflectionClass.dictionaryArrayFromJson(json)
         for item in dictArray {
             let arrayTypeInstance = getArrayTypeInstance(self, context: context)
-            EVReflection.setPropertiesfromDictionary(item, anyObject: arrayTypeInstance, conversionOptions: conversionOptions)
+            EVReflectionClass.setPropertiesfromDictionary(item, anyObject: arrayTypeInstance, conversionOptions: conversionOptions)
             self.append(arrayTypeInstance)
         }
     }
@@ -49,7 +49,7 @@ public extension Array where Element: EVManagedObject {
      */
     func getTypeInstance<T: EVManagedObject>(context: NSManagedObjectContext) -> T {
         let nsobjectype: EVManagedObject.Type = T.self
-        let name = EVReflection.swiftStringFromClass(nsobjectype)
+        let name = EVReflectionClass.swiftStringFromClass(nsobjectype)
         guard let entity = NSEntityDescription.entity(forEntityName: name, in: context) else { return T() }
         let nsobject: EVManagedObject = nsobjectype.init(entity: entity, insertInto: context)
         

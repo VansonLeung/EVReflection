@@ -17,7 +17,7 @@ class MoyaRxSwiftTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // When running EVReflection outside of your main bundle, you have to specify where to find the objects
-        EVReflection.setBundleIdentifier(Repository.self)
+        EVReflectionClass.setBundleIdentifier(Repository.self)
     }
     
     var disposeBag = DisposeBag()

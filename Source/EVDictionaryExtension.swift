@@ -19,7 +19,7 @@ public extension NSMutableDictionary {
      */
     convenience init(json: String) {
         self.init()
-        let jsonDict = EVReflection.dictionaryFromJson(json)
+        let jsonDict = EVReflectionClass.dictionaryFromJson(json)
         for (key, value) in jsonDict {
             self[key] = value
         }

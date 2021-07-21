@@ -141,7 +141,7 @@ class NestedGenericsIssue25: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(BaseModel.self)
+        EVReflectionClass.setBundleIdentifier(BaseModel.self)
     }
 
     override func tearDown() {

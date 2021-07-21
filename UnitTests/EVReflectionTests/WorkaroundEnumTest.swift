@@ -24,7 +24,7 @@ class EnumWorkaroundsTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(myClass.self)
+        EVReflectionClass.setBundleIdentifier(myClass.self)
     }
     
     /**
@@ -102,7 +102,7 @@ class EnumWorkaroundsTests: XCTestCase {
     }
     
     func getRawValue(_ theEnum: Any) -> Any {        
-        let (val, _, _) = EVReflection.valueForAny(self, key: "a", anyValue: theEnum)
+        let (val, _, _) = EVReflectionClass.valueForAny(self, key: "a", anyValue: theEnum)
         return val
     }
     

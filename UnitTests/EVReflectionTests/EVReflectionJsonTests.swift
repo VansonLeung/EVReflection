@@ -34,7 +34,7 @@ class EVReflectionJsonTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(TestObject.self)
+        EVReflectionClass.setBundleIdentifier(TestObject.self)
     }
     
     /**
@@ -102,23 +102,23 @@ class EVReflectionJsonTests: XCTestCase {
         XCTAssertTrue(user.closeFriends?.count == 1, "friends should have 1 (empty) user")
         
         NSLog("\n\n===>This will generate an error because you can't create a dictionary for invalid json")
-        let a = EVReflection.dictionaryFromJson(nil)
+        let a = EVReflectionClass.dictionaryFromJson(nil)
         XCTAssertEqual(a.count, 0, "Can't create a dictionairy from nil")
 
         NSLog("\n\n===>This will generate an error because you can't create a dictionary for invalid json")
-        let b = EVReflection.dictionaryFromJson("[{\"asdf\"}")
+        let b = EVReflectionClass.dictionaryFromJson("[{\"asdf\"}")
         XCTAssertEqual(b.count, 0, "Can't create a dictionairy from nonsence")
         
         NSLog("\n\n===>This will generate a warning because you can't create a dictionary for a non NSObject type")
-        let c = EVReflection.arrayFromJson(type: MyEnumFive.ok, json: "[{\"id\": 24}]")
+        let c = EVReflectionClass.arrayFromJson(type: MyEnumFive.ok, json: "[{\"id\": 24}]")
         XCTAssertEqual(c.count, 0, "Can't create a dictionairy for a non NSObject type")
 
         NSLog("\n\n===>This will generate an error because you can't create a dictionary for invalid json")
-        let d = EVReflection.arrayFromJson(type: User(), json: "[{\"id\": 24}")
+        let d = EVReflectionClass.arrayFromJson(type: User(), json: "[{\"id\": 24}")
         XCTAssertEqual(d.count, 0, "Can't create a dictionairy for invalid json")
 
         NSLog("\n\n===>This will generate an error because you can't create a dictionary for invalid json")
-        let e = EVReflection.arrayFromJson(type: User(), json: "")
+        let e = EVReflectionClass.arrayFromJson(type: User(), json: "")
         XCTAssertEqual(e.count, 0, "Can't create a dictionairy for invalid json")
     }
 
@@ -153,8 +153,8 @@ class EVReflectionJsonTests: XCTestCase {
         let userRegenerated = User(json:jsonString)
         validateUser(userRegenerated)
         
-        print("original = \(EVReflection.description(userOriginal))")
-        print("regenerated = \(EVReflection.description(userRegenerated))")
+        print("original = \(EVReflectionClass.description(userOriginal))")
+        print("regenerated = \(EVReflectionClass.description(userRegenerated))")
         
         let friendsDictArray = userRegenerated.closeFriends?.toDictionaryArray()
         XCTAssertEqual(friendsDictArray?.count, 2, "There should now be a dictionary array with 2 dictionaries")
@@ -186,8 +186,8 @@ class EVReflectionJsonTests: XCTestCase {
         let userRegenerated = User(data: jsonData)
         validateUser(userRegenerated)
         
-        print("original = \(EVReflection.description(userOriginal))")
-        print("regenerated = \(EVReflection.description(userRegenerated))")
+        print("original = \(EVReflectionClass.description(userOriginal))")
+        print("regenerated = \(EVReflectionClass.description(userRegenerated))")
         
         let friendsDictArray = userRegenerated.closeFriends?.toDictionaryArray()
         XCTAssertEqual(friendsDictArray?.count, 2, "There should now be a dictionary array with 2 dictionaries")

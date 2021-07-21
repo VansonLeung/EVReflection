@@ -17,7 +17,7 @@ class TestIssue197: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(Base.self)
+        EVReflectionClass.setBundleIdentifier(Base.self)
     }
     
     override func tearDown() {
@@ -100,7 +100,7 @@ extension Base197 : EVCustomReflectable {
      */
     public func constructWith(value: Any?) -> EVCustomReflectable? {
         if let jsonDict = value as? NSDictionary {
-            EVReflection.setPropertiesfromDictionary(jsonDict, anyObject: self)
+            EVReflectionClass.setPropertiesfromDictionary(jsonDict, anyObject: self)
         }
         return self
     }

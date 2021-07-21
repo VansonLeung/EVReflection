@@ -15,7 +15,7 @@ class EVReflectionEVCustomReflectable: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        EVReflection.setBundleIdentifier(XObject.self)
+        EVReflectionClass.setBundleIdentifier(XObject.self)
     }
     
     func test() {
@@ -47,7 +47,7 @@ extension XObject : EVCustomReflectable {
     }
     public func constructWith(value: Any?) -> EVCustomReflectable? {
         if let jsonDict = value as? NSDictionary {
-            EVReflection.setPropertiesfromDictionary(jsonDict, anyObject: self)
+            EVReflectionClass.setPropertiesfromDictionary(jsonDict, anyObject: self)
         }
         return self
     }
