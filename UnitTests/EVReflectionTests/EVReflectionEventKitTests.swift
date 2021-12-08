@@ -11,6 +11,7 @@
 #else
 
 
+
 import XCTest
 import Foundation
 import EventKit
@@ -20,7 +21,10 @@ import EVReflection
 /**
  Testing EVReflection with EKEvent
  */
-
+/* Andy Reeman: I cannot get this to compile using swift package manager with platform targets less than iOS 13 as we don't seem to be able to specifiy the platform to use in running the tests and EKObject is only available in iOS 13 and above.
+    Setting an @available decorator on this extension then causes the method definitions
+ to not compile as they are no longer as 'open' as the protocol specifies.
+ 
 extension EKObject : EVReflectable {
     open override func setValue(_ value: Any!, forUndefinedKey key: String) {
         if let kvc = self as? EVGenericsKVC {
@@ -31,8 +35,8 @@ extension EKObject : EVReflectable {
             
         }
     }
-    
-    override open func value(forUndefinedKey key: String) -> Any? {
+        
+    open override func value(forUndefinedKey key: String) -> Any? {
         evPrint(.IncorrectKey, "\nWARNING: The class '\(EVReflection.swiftStringFromClass(self))' is not key value coding-compliant for the key '\(key)'\n")
         return nil
     }
@@ -40,6 +44,7 @@ extension EKObject : EVReflectable {
 
 let store = EKEventStore()
 
+@available(iOS 13.0, *)
 class EVReflectionEventKitTests: XCTestCase {
     func testEventKit() {
 
@@ -106,5 +111,5 @@ class EVReflectionEventKitTests: XCTestCase {
         return propertyNames
     }
 }
-
+*/
 #endif
